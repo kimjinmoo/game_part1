@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] protected float moveSpeed ;
+    [SerializeField] protected Transform player;
+
+    private protected Rigidbody2D rb;
+    private protected Vector2 movement;
+
     private Animator animator;
 
     private void Awake()
@@ -11,23 +17,26 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public float moveSpeed = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    void MoveControl()
-    {
-        animator.SetBool("isRun", true);
-        float yMove = moveSpeed * Time.deltaTime;
-        transform.Translate(0, -yMove, 0);
+        rb = this.GetComponent<Rigidbody2D>(); ;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveControl();
+        followTarget();
     }
-}
+
+    void followTarget()
+    {
+        if(Vector2.Distance(transform.position, player.position) > 1f) {
+            animator.SetFloat("RunState", 0.5f);
+            transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+        }    else {
+            animator.SetFloat("Attack", 0.5f);
+            rb.velocity = Vector2.zero;
+        }
+    }
+ }
