@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class PlayerController : MonoBehaviour
 {
     private Animator animator;
+    // ¼Óµµ
+    public float speed;
 
     private void Awake()
     {
@@ -26,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 moveVector = new Vector3(moveX, moveY, 0f);
 
-        transform.Translate(moveVector.normalized * Time.deltaTime * 5f);
+        transform.Translate(moveVector.normalized * Time.deltaTime * speed);
 
         if (moveX > 0) transform.localScale = new Vector3(-1, 1, 1);
         else if (moveX < 0) transform.localScale = new Vector3(1, 1, 1);
@@ -44,6 +46,10 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger("Attack");
         }
+    }
 
+    public void attack()
+    {
+        animator.SetTrigger("Attack");
     }
 }
