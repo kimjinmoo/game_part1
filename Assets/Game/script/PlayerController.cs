@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            animator.SetTrigger("Die");
+            attack();
         }
         if (playInput.x != 0 || playInput.y != 0)
         {
