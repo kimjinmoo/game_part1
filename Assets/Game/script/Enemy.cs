@@ -44,6 +44,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        player = GameManager.instance.player.GetComponent<Transform>();
+    }
+
     void followTarget()
     {
        // 케릭터를 쫒는다.
