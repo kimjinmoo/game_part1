@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    // ½ºÆù Æ÷ÀÎÆ®
+    // spawn
     public Transform[] spawnPoint;
+    public SpawnData[] spawnData;
 
-    // Å¸ÀÌ¸Ó
+    public int level;
+    public int enemyCount = 0;
+    
+    // timer
     float timer;
 
     private void Awake()
@@ -19,12 +23,14 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if(timer > 1f)
+        level = Mathf.FloorToInt(GameManager.instance.gameTime / 3f);
+
+        print("level : " + level);
+        if(enemyCount < 5)
         {
-            timer = 0f;
-            // ½ºÆù
+            //timer = 0f;
+            // ï¿½ï¿½ï¿½ï¿½
             Spawn();
-            
         }
     }
 
@@ -32,5 +38,15 @@ public class Spawner : MonoBehaviour
     {
         GameObject enemy = GameManager.instance.pool.Get(0);
         enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
+        enemy.GetComponent<Enemy>().Init(spawnData[level]);
+        enemyCount += 1;
     }
+}
+
+[System.Serializable]
+public class SpawnData {
+    public float spawnTime;
+    public int spriteType;
+    public int health;
+    public float speed;
 }

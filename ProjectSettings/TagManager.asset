@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Area
   - Enemy
+  - Sword
   layers:
   - Default
   - TransparentFX

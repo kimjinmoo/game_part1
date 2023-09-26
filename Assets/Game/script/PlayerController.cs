@@ -10,16 +10,16 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 playInput;
 
-    // Áß·Â
-    Rigidbody2D r;
+    // ï¿½ß·ï¿½
+    Rigidbody2D rb;
    
-    // ¼Óµµ
+    // ï¿½Óµï¿½
     public float speed;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        r = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Start is called before the first frame update
@@ -84,22 +84,22 @@ public class PlayerController : MonoBehaviour
             }
         } else
         {
-            animator.SetFloat("RunState", 0);
+            animator.SetFloat("RunState", 0.0f);
         }
         
     }
 
     void FixedUpdate()
     {
-        // ÈûÀ» ÁØ´Ù.
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½.
         /*r.AddForce(playInput);*/
 
-        // ¼Óµµ Á¦¾î
+        // ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
         /*r.velocity = playInput;*/
 
-        // À§Ä¡ ÀÌµ¿
+        // ï¿½ï¿½Ä¡ ï¿½Ìµï¿½
         Vector2 moveVector = playInput * speed * Time.fixedDeltaTime;
-        r.MovePosition(r.position + moveVector);
+        rb.MovePosition(rb.position + moveVector);
     }
 
     public void attack()
